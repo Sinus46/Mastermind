@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Game {
     private final PieceSet goal;
-    private final List<PieceSet> guesses = new ArrayList<>();
+    private final List<Guess> guesses = new ArrayList<>();
     private boolean complete = false;
 
     public Game(PieceSet goal) {
@@ -20,19 +20,19 @@ public class Game {
         this(PieceSet.randomSet());
     }
 
-    public Comparison guess(PieceSet guess) throws GameOverException {
+    public boolean guess(PieceSet guess) throws GameOverException {
         if (complete) {
             throw new GameOverException();
         }
-        Comparison result = goal.compare(guess);
-        guesses.add(guess);
-        if (result.allCorrect()) {
+        Guess e = new Guess(guess, goal);
+        guesses.add(e);
+        if (e.getCorrectness().allCorrect()) {
             complete = true;
         }
-        return result;
+        return complete;
     }
 
-    public List<PieceSet> getGuesses() {
+    public List<Guess> getGuesses() {
         return new ArrayList<>(guesses);
     }
 
