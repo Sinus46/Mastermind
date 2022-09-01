@@ -1,6 +1,7 @@
 package core;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PieceSet {
@@ -24,6 +25,10 @@ public class PieceSet {
         return new Comparison(misplaced, correct);
     }
 
+    public Piece[] getPieces() {
+        return pieces;
+    }
+
     public static PieceSet randomSet(Random random) {
         List<Piece> values = Arrays.asList(Piece.values());
         Collections.shuffle(values, random);
@@ -32,5 +37,10 @@ public class PieceSet {
 
     public static PieceSet randomSet() {
         return randomSet(new Random());
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.stream(pieces).map(Piece::getEmoji).collect(Collectors.joining(""));
     }
 }
