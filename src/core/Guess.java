@@ -16,9 +16,4 @@ public class Guess {
     public Comparison getCorrectness() {
         return correctness;
     }
-
-    @Override
-    public String toString() {
-        return guess.toString();
-    }
 }
